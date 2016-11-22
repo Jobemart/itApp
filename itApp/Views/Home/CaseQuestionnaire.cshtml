@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Incidencias";
+}
+
+@model itApp.ViewModels.CaseViewModel
+@using (Html.BeginForm())
+{
+    <h1>Cuestionario</h1>
+        <div>
+            <h4>Título:</h4>    
+            @Html.TextBoxFor(Model => Model.Title, new { maxlength = "30", size = "50" })<br />
+            <br />
+            <input type="submit" value="Done" />
+        </div>
+}
+
