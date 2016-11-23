@@ -16,7 +16,7 @@ namespace itApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("index.aspx");
+            Response.Redirect("CaseQuestionnaire.aspx");
         }
     }
 }
