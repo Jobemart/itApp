@@ -3,10 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-    <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-    <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-    <!--[if IE 9]> <html class="no-js ie9 oldie" lang="en"> <![endif]-->
     <meta charset="utf-8">
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -138,10 +134,10 @@
         // You may also attach Backstretch to a block-level element
         $.backstretch(
         [
-            "img/44.jpg",
+            //"img/44.jpg",
             "img/colorful.jpg",
-            "img/34.jpg",
-            "img/images.jpg"
+            //"img/34.jpg",
+            //"img/images.jpg"
         ],
 
         {
