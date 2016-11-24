@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Coming soon, Bootstrap, Bootstrap 3.0, Free Coming Soon, free coming soon, free template, coming soon template, Html template, html template, html5, Code lab, codelab, codelab coming soon template, bootstrap coming soon template">
+    <meta name="description" content="IT">
     <title>Nueva incidencia</title>
     <!-- ============ Google fonts ============ -->
     <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet'
@@ -59,9 +59,19 @@
                                 <asp:TextBox ID="DescriptionBox" runat="server" placeholder="Descripción" CssClass="form-control"
                                     TextMode="MultiLine" Rows="3"> </asp:TextBox>
                             </div>
+                            <asp:Label ID="Label2" runat="server" Text="Solicitante" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10">
+                                <asp:TextBox ID="ApplicantBox" runat="server" placeholder="Solicitante" CssClass="form-control"> </asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label ID="Label3" runat="server" Text="Deadline" CssClass="col-lg-2 control-label"></asp:Label>
+                            <div class="col-lg-10" style="height: 230px">
+                                <asp:Calendar ID="DeadlineCalendar" runat="server" style="margin-top: 0px" CssClass="form-control"></asp:Calendar>
+                            </div>
                         </div>
                         <!--<div class="form-group">
-                            <asp:Label ID="Label2" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="Label200" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" CssClass="form-control"
                                     TextMode="Password"></asp:TextBox>
@@ -73,12 +83,6 @@
                             </div>
                         </div>
                         -->
-                        <div class="form-group">
-                            <asp:Label ID="Label3" runat="server" Text="Deadline" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:Calendar ID="DeadlineCalendar" runat="server" CssClass="form-control"></asp:Calendar>
-                            </div>
-                        </div>
                         <!--<div class="form-group">
                             <asp:Label ID="Label4" runat="server" Text="Gender" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">

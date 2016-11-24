@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.OleDb;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace itApp
 {
@@ -18,48 +19,97 @@ namespace itApp
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            TextBox TitleBox = (TextBox) FindControl("TitleBox");
-            if (TitleBox != null)
+            string userName = User.Identity.Name;
+            Debug.WriteLine("nombre: "+userName);
+
+            System.Web.UI.WebControls.TextBox TitleBox = (System.Web.UI.WebControls.TextBox)FindControl("TitleBox");
+            System.Web.UI.WebControls.TextBox DescriptionBox = (System.Web.UI.WebControls.TextBox)FindControl("DescriptionBox");
+            System.Web.UI.WebControls.TextBox ApplicantBox = (System.Web.UI.WebControls.TextBox)FindControl("ApplicantBox");
+            Calendar Deadline = (Calendar)FindControl("DeadlineCalendar");
+            DropDownList Category = (DropDownList)FindControl("CategoryDropDownList");
+            DropDownList Priority = (DropDownList)FindControl("PriorityDropDownList");
+
+
+            if (TitleBox != null || DescriptionBox != null || ApplicantBox != null 
+                || Deadline != null || Category != null || Priority != null)
             {
+
                 string TitleCase = TitleBox.Text;
-                Debug.WriteLine(TitleCase);
+                string DescriptionCase = DescriptionBox.Text;
+                string ApplicantCase = ApplicantBox.Text;
+                DateTime DeadlineCase = Deadline.SelectedDate;
+                string CategoryCase = Category.Text;
+                string PriorityCase = Priority.Text;
 
-                string strDSN = "Provider=Microsoft.ACE.OLEDB.12.0;"+
-                    "Data Source =|DataDirectory|CaseList.accdb;"+
-                    "Persist Security Info = False";
-
-                OleDbConnection newConn = new OleDbConnection(strDSN);
-                try
-                {
-                    newConn.Open();
-                    OleDbCommand newCmd = newConn.CreateCommand();
-                    newCmd.CommandText = "INSERT INTO [Case]([Title]) VALUES(@title)";
-                    newCmd.Parameters.AddRange(new OleDbParameter[]
-                    {
-                        new OleDbParameter("@title", TitleCase)
-                    });
-                    //OleDbCommand newCmd = new OleDbCommand("insert into Case(Title) values('" + TitleCase + "')");
-                    newCmd.ExecuteNonQuery();
+                if (TitleCase == "")
+                { 
+                    MessageBox.Show("Por favor, añade un título a la incidencia");
                 }
-                catch (Exception ex)
+                else
                 {
- 
-                    Debug.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    newConn.Close();
+                    addCaseToBD(TitleCase,DescriptionCase,ApplicantCase,DeadlineCase,CategoryCase,PriorityCase);
                 }
             }
             else
             {
-                Debug.WriteLine("No ha encontrado el textbox");
+                Debug.WriteLine("No ha encontrado alguno de los componentes");
+                MessageBox.Show("Error interno, por favor vuelve a probar más tarde");
             }
         }
+
+
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");
+        }
+
+
+
+        protected void addCaseToBD(string TitleCase, string DescriptionCase, string ApplicantCase,
+            DateTime DeadlineCase, string CategoryCase, string PriorityCase)
+        {
+
+            DateTime CreationDate = DateTime.Now;
+            string StatusCase = "Pending";
+            string ID = CreationDate.Year.ToString() + CreationDate.Month.ToString() +
+                CreationDate.Day.ToString() + CreationDate.Millisecond.ToString();
+
+            string strDSN = "Provider=Microsoft.ACE.OLEDB.12.0;" +
+                    "Data Source =|DataDirectory|CaseList.accdb;" +
+                    "Persist Security Info = False";
+
+            OleDbConnection newConn = new OleDbConnection(strDSN);
+            try
+            {
+                newConn.Open();
+                OleDbCommand newCmd = newConn.CreateCommand();
+                newCmd.CommandText = "INSERT INTO [Case] ([ID],[Title],[Description],[Applicant],[DeadlineDate],[Category],[Priority],[CreationDate],[Status]) "+
+                    "VALUES (@id, @title, @description, @applicant, @deadline, @category, @priority, @creationdate, @status)";
+                newCmd.Parameters.AddRange(new OleDbParameter[]
+                {
+                        new OleDbParameter("@id", ID),
+                        new OleDbParameter("@title", TitleCase),
+                        new OleDbParameter("@description", DescriptionCase),
+                        new OleDbParameter("@applicant", ApplicantCase),
+                        new OleDbParameter("@deadline", DeadlineCase.ToString()),
+                        new OleDbParameter("@category", CategoryCase),
+                        new OleDbParameter("@priority", PriorityCase),
+                        new OleDbParameter("@creationdate", CreationDate.ToString()),
+                        new OleDbParameter("@status", StatusCase),
+                });
+                newCmd.ExecuteNonQuery();
+                MessageBox.Show("Incidencia registrada con exito");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error interno, por favor vuelve a probar más tarde");
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                newConn.Close();
+            }
         }
     }
 }
