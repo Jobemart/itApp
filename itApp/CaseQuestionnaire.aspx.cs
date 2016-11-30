@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace itApp
 {
@@ -19,24 +21,21 @@ namespace itApp
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string userName = User.Identity.Name;
-            Debug.WriteLine("nombre: "+userName);
 
             System.Web.UI.WebControls.TextBox TitleBox = (System.Web.UI.WebControls.TextBox)FindControl("TitleBox");
             System.Web.UI.WebControls.TextBox DescriptionBox = (System.Web.UI.WebControls.TextBox)FindControl("DescriptionBox");
-            System.Web.UI.WebControls.TextBox ApplicantBox = (System.Web.UI.WebControls.TextBox)FindControl("ApplicantBox");
             Calendar Deadline = (Calendar)FindControl("DeadlineCalendar");
             DropDownList Category = (DropDownList)FindControl("CategoryDropDownList");
             DropDownList Priority = (DropDownList)FindControl("PriorityDropDownList");
 
 
-            if (TitleBox != null || DescriptionBox != null || ApplicantBox != null 
+            if (TitleBox != null || DescriptionBox != null 
                 || Deadline != null || Category != null || Priority != null)
             {
 
                 string TitleCase = TitleBox.Text;
                 string DescriptionCase = DescriptionBox.Text;
-                string ApplicantCase = ApplicantBox.Text;
+                string ApplicantCase = Context.User.Identity.Name;
                 DateTime DeadlineCase = Deadline.SelectedDate;
                 string CategoryCase = Category.Text;
                 string PriorityCase = Priority.Text;
@@ -69,11 +68,12 @@ namespace itApp
         protected void addCaseToBD(string TitleCase, string DescriptionCase, string ApplicantCase,
             DateTime DeadlineCase, string CategoryCase, string PriorityCase)
         {
+            Debug.WriteLine(ApplicantCase);
 
             DateTime CreationDate = DateTime.Now;
             string StatusCase = "Pending";
-            string ID = CreationDate.Year.ToString() + CreationDate.Month.ToString() +
-                CreationDate.Day.ToString() + CreationDate.Millisecond.ToString();
+            string ID = CreationDate.Month.ToString() + CreationDate.Day.ToString() + 
+                CreationDate.Minute + CreationDate.Second + CreationDate.Millisecond;
 
             string strDSN = "Provider=Microsoft.ACE.OLEDB.12.0;" +
                     "Data Source =|DataDirectory|CaseList.accdb;" +
@@ -99,7 +99,7 @@ namespace itApp
                         new OleDbParameter("@status", StatusCase),
                 });
                 newCmd.ExecuteNonQuery();
-                MessageBox.Show("Incidencia registrada con exito");
+                MessageBox.Show("Incidencia registrada con exito, anota esta ID: "+ID);
             }
             catch (Exception ex)
             {

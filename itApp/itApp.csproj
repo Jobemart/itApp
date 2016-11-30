@@ -62,6 +62,7 @@
   <ItemGroup>
     <Content Include="App_Data\CaseList.accdb" />
     <Content Include="CaseQuestionnaire.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
   </ItemGroup>
@@ -69,6 +70,9 @@
     <Compile Include="CaseQuestionnaire.aspx.cs">
       <DependentUpon>CaseQuestionnaire.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LdapAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

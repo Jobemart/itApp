@@ -55,10 +55,6 @@
                                 <asp:TextBox ID="DescriptionBox" runat="server" placeholder="Descripción" CssClass="form-control"
                                     TextMode="MultiLine" Rows="3"> </asp:TextBox>
                             </div>
-                            <asp:Label ID="Label2" runat="server" Text="Solicitante" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="ApplicantBox" runat="server" placeholder="Solicitante" CssClass="form-control"> </asp:TextBox>
-                            </div>
                         </div>
                         <div class="form-group">
                             <asp:Label ID="Label3" runat="server" Text="Deadline" CssClass="col-lg-2 control-label"></asp:Label>
