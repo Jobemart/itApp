@@ -72,8 +72,8 @@ namespace itApp
 
             DateTime CreationDate = DateTime.Now;
             string StatusCase = "Pending";
-            string ID = CreationDate.Month.ToString() + CreationDate.Day.ToString() + 
-                CreationDate.Minute + CreationDate.Second + CreationDate.Millisecond;
+            string ID = CreationDate.Month.ToString() + CreationDate.Day.ToString() +
+                CreationDate.Minute + CreationDate.Second;
 
             string strDSN = "Provider=Microsoft.ACE.OLEDB.12.0;" +
                     "Data Source =|DataDirectory|CaseList.accdb;" +
