@@ -32,9 +32,7 @@
             <div class="collapse navbar-collapse navbar-menubuilder">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">Home</a> </li>
-                    <li><a href="/products">Products</a> </li>
-                    <li><a href="/about-us">About Us</a> </li>
-                    <li><a href="/contact">Contact Us</a> </li>
+                    <li><a href="Admin">Administrar</a></li>
                 </ul>
             </div>
         </div>
@@ -61,34 +59,24 @@
                             <div class="col-lg-10" style="height: 230px">
                                 <asp:Calendar ID="DeadlineCalendar" runat="server" style="margin-top: 0px" CssClass="form-control"></asp:Calendar>
                             </div>
-                        </div>
-                        <!--<div class="form-group">
-                            <asp:Label ID="Label200" runat="server" Text="Password" CssClass="col-lg-2 control-label"></asp:Label>
-                            <div class="col-lg-10">
-                                <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" CssClass="form-control"
-                                    TextMode="Password"></asp:TextBox>
-                                <div class="checkbox">
-                                    <label>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember Me" />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                        <!--<div class="form-group">
-                            <asp:Label ID="Label4" runat="server" Text="Gender" CssClass="col-lg-2 control-label"></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text="Departamento" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
                                 <div class="radio">
                                     <label>
-                                        <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                                            <asp:ListItem Selected="True">Male</asp:ListItem>
-                                            <asp:ListItem>Female</asp:ListItem>
+                                        <br />
+                                        <asp:RadioButtonList ID="DepartmentRadioButton" runat="server" RepeatColumns="2" Width="80%">
+                                            <asp:ListItem>Desarrollo</asp:ListItem>
+                                            <asp:ListItem>Administración</asp:ListItem>
+                                            <asp:ListItem>Contabilidad</asp:ListItem>
+                                            <asp:ListItem>QA</asp:ListItem>
+                                            <asp:ListItem>Helpdesk</asp:ListItem>
+                                            <asp:ListItem>Sistemas</asp:ListItem>
                                         </asp:RadioButtonList>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        -->
+
                         <div class="form-group">
                             <asp:Label ID="Label7" runat="server" Text="Categoria" CssClass="col-lg-2 control-label"></asp:Label>                          
                             <div class="col-lg-10">

@@ -120,6 +120,12 @@ label
 .radio
 {
     color: #F7F7F7;
+    margin: 10px;
+    padding: 10px;
+}
+.item
+{
+    margin-right: 150px;
 }
 legend
 {

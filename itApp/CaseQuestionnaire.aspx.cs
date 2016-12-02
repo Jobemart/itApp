@@ -27,9 +27,10 @@ namespace itApp
             Calendar Deadline = (Calendar)FindControl("DeadlineCalendar");
             DropDownList Category = (DropDownList)FindControl("CategoryDropDownList");
             DropDownList Priority = (DropDownList)FindControl("PriorityDropDownList");
+            RadioButtonList Department = (RadioButtonList)FindControl("DepartmentRadioButton");
 
 
-            if (TitleBox != null || DescriptionBox != null 
+            if (TitleBox != null || DescriptionBox != null || Department != null
                 || Deadline != null || Category != null || Priority != null)
             {
 
@@ -39,20 +40,15 @@ namespace itApp
                 DateTime DeadlineCase = Deadline.SelectedDate;
                 string CategoryCase = Category.Text;
                 string PriorityCase = Priority.Text;
+                string DepartmentCase = Department.SelectedItem.Text;
 
-                if (TitleCase == "")
-                { 
-                    MessageBox.Show("Por favor, añade un título a la incidencia");
-                }
-                else
-                {
-                    addCaseToBD(TitleCase,DescriptionCase,ApplicantCase,DeadlineCase,CategoryCase,PriorityCase);
-                }
+                addCaseToBD(TitleCase,DescriptionCase,ApplicantCase,DeadlineCase,CategoryCase,PriorityCase, DepartmentCase);
+
             }
             else
             {
                 Debug.WriteLine("No ha encontrado alguno de los componentes");
-                MessageBox.Show("Error interno, por favor vuelve a probar más tarde");
+                MessageBox.Show("Por favor, rellena todo los campos");
             }
         }
 
@@ -66,7 +62,7 @@ namespace itApp
 
 
         protected void addCaseToBD(string TitleCase, string DescriptionCase, string ApplicantCase,
-            DateTime DeadlineCase, string CategoryCase, string PriorityCase)
+            DateTime DeadlineCase, string CategoryCase, string PriorityCase, string DepartmentCase)
         {
             Debug.WriteLine(ApplicantCase);
 
@@ -84,8 +80,8 @@ namespace itApp
             {
                 newConn.Open();
                 OleDbCommand newCmd = newConn.CreateCommand();
-                newCmd.CommandText = "INSERT INTO [Case] ([ID],[Title],[Description],[Applicant],[DeadlineDate],[Category],[Priority],[CreationDate],[Status]) "+
-                    "VALUES (@id, @title, @description, @applicant, @deadline, @category, @priority, @creationdate, @status)";
+                newCmd.CommandText = "INSERT INTO [Case] ([ID],[Title],[Description],[Applicant],[DeadlineDate],[Category],[Priority],[Department],[CreationDate],[Status]) "+
+                    "VALUES (@id, @title, @description, @applicant, @deadline, @category, @priority, @department, @creationdate, @status)";
                 newCmd.Parameters.AddRange(new OleDbParameter[]
                 {
                         new OleDbParameter("@id", ID),
@@ -95,6 +91,7 @@ namespace itApp
                         new OleDbParameter("@deadline", DeadlineCase.ToString()),
                         new OleDbParameter("@category", CategoryCase),
                         new OleDbParameter("@priority", PriorityCase),
+                        new OleDbParameter("@department", DepartmentCase),
                         new OleDbParameter("@creationdate", CreationDate.ToString()),
                         new OleDbParameter("@status", StatusCase),
                 });

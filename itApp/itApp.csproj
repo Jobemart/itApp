@@ -65,6 +65,7 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
+    <Content Include="Admin.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaseQuestionnaire.aspx.cs">
@@ -84,6 +85,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
