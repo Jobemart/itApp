@@ -19,43 +19,61 @@ namespace itApp
                     "Data Source =|DataDirectory|CaseList.accdb;" +
                     "Persist Security Info = False";
 
-            string queryString = "SELECT * FROM [Case]";
+            string queryString = "select * from [Case]";
+            OleDbConnection connection = new OleDbConnection(strDSN);
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(strDSN))
+                connection.Open();
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    OleDbCommand command = new OleDbCommand(queryString, connection);
-                    connection.Open();
-                    OleDbDataReader reader = command.ExecuteReader();
+                    TableRow tRow = new TableRow();
+                    TableCase.Rows.Add(tRow);
 
-                    while (reader.Read())
+                    for (int i = 0; i<11; i++)
                     {
-                        TableRow tRow = new TableRow();
-                        TableCase.Rows.Add(tRow);
-
-                        for (int i = 0; i<10; i++)
+                        switch (i)
                         {
-                            if (i == 0)
-                            {
+                            case 0:
                                 TableCell tCell = new TableCell();
                                 tCell.Text = reader.GetValue(i).ToString();
                                 tRow.Cells.Add(tCell);
-                            }
-                            else
-                            {
-                                TableCell tCell = new TableCell();
+                                break;
+                                /*
+                            case 4:
+                                tCell = new TableCell();
+                                tCell.Text = reader.GetDateTime(i).ToString();
+                                break;
+                            case 8:
+                                tCell = new TableCell();
+                                tCell.Text = reader.GetDateTime(i).ToString();
+                                break;
+                            case 11:
+                                tCell = new TableCell();
+                                tCell.Text = reader.GetDateTime(i).ToString();
+                                break;
+                                */
+                            default:
+                                tCell = new TableCell();
                                 tCell.Text = reader.GetString(i);
                                 tRow.Cells.Add(tCell);
-                            }
+                                break;
+
                         }
-                
                     }
-                    reader.Close();
                 }
+                reader.Close();            
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to connect to data source");
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }

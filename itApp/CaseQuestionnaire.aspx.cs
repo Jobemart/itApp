@@ -68,6 +68,8 @@ namespace itApp
 
             DateTime CreationDate = DateTime.Now;
             string StatusCase = "Pending";
+            string ResolvedDate = "null";
+            string Responsable = "null";
             string ID = CreationDate.Month.ToString() + CreationDate.Day.ToString() +
                 CreationDate.Minute + CreationDate.Second;
 
@@ -80,8 +82,8 @@ namespace itApp
             {
                 newConn.Open();
                 OleDbCommand newCmd = newConn.CreateCommand();
-                newCmd.CommandText = "INSERT INTO [Case] ([ID],[Title],[Description],[Applicant],[DeadlineDate],[Category],[Priority],[Department],[CreationDate],[Status]) "+
-                    "VALUES (@id, @title, @description, @applicant, @deadline, @category, @priority, @department, @creationdate, @status)";
+                newCmd.CommandText = "INSERT INTO [Case] ([ID],[Title],[Description],[Applicant],[DeadlineDate],[Category],[Priority],[Department],[CreationDate],[Status],[ResolvedDate],[Responsable])"+
+                    "VALUES (@id, @title, @description, @applicant, @deadline, @category, @priority, @department, @creationdate, @status, @resolved, @responsable)";
                 newCmd.Parameters.AddRange(new OleDbParameter[]
                 {
                         new OleDbParameter("@id", ID),
@@ -94,6 +96,9 @@ namespace itApp
                         new OleDbParameter("@department", DepartmentCase),
                         new OleDbParameter("@creationdate", CreationDate.ToString()),
                         new OleDbParameter("@status", StatusCase),
+                        new OleDbParameter("@resolved", ResolvedDate),
+                        new OleDbParameter("@responsable", Responsable),
+
                 });
                 newCmd.ExecuteNonQuery();
                 MessageBox.Show("Incidencia registrada con exito, anota esta ID: "+ID);
