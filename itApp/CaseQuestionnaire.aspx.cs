@@ -37,7 +37,7 @@ namespace itApp
                 string TitleCase = TitleBox.Text;
                 string DescriptionCase = DescriptionBox.Text;
                 string ApplicantCase = Context.User.Identity.Name;
-                DateTime DeadlineCase = Deadline.SelectedDate;
+                string DeadlineCase = Deadline.SelectedDate.ToShortDateString();
                 string CategoryCase = Category.Text;
                 string PriorityCase = Priority.Text;
                 string DepartmentCase = Department.SelectedItem.Text;
@@ -62,7 +62,7 @@ namespace itApp
 
 
         protected void addCaseToBD(string TitleCase, string DescriptionCase, string ApplicantCase,
-            DateTime DeadlineCase, string CategoryCase, string PriorityCase, string DepartmentCase)
+            string DeadlineCase, string CategoryCase, string PriorityCase, string DepartmentCase)
         {
             Debug.WriteLine(ApplicantCase);
 
@@ -90,7 +90,7 @@ namespace itApp
                         new OleDbParameter("@title", TitleCase),
                         new OleDbParameter("@description", DescriptionCase),
                         new OleDbParameter("@applicant", ApplicantCase),
-                        new OleDbParameter("@deadline", DeadlineCase.ToString()),
+                        new OleDbParameter("@deadline", DeadlineCase),
                         new OleDbParameter("@category", CategoryCase),
                         new OleDbParameter("@priority", PriorityCase),
                         new OleDbParameter("@department", DepartmentCase),

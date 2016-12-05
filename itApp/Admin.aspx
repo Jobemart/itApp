@@ -37,9 +37,52 @@
             </div>
         </div>
     </div>
-    <div class="container" >
-        <asp:Table ID="TableCase" runat="server" Height="497px" Width="974px">
+    <div>
+        <asp:Table ID="TableCase" runat="server" 
+            Font-Size="Large" 
+            HorizontalAlign="Center"
+            Width="95%"
+            Font-Names="Palatino"
+            BackColor="AliceBlue"
+            BorderColor="DarkRed"
+            BorderWidth="2"
+            ForeColor="Black"
+            CellPadding="5"
+            CellSpacing="5"
+            Style="text-align: center">
+            <asp:TableHeaderRow 
+                runat="server" 
+                ForeColor="DarkOrange"
+                BackColor="Black"
+                Font-Bold="true"
+                CellSpacing="5"
+                CellPadding="5">
+                <asp:TableHeaderCell></asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">ID</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Título</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Descripción</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Solicitante</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Deadline</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Categoria</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Prioridad</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Departamento</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Fecha creación</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Estado</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Fecha resolución</asp:TableHeaderCell>
+                <asp:TableHeaderCell Style="text-align: center">Responsable</asp:TableHeaderCell>
+            </asp:TableHeaderRow>
         </asp:Table>
+    </div>
+    <div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <asp:Button ID="btnAssign" runat="server" CssClass="btn btn-primary" Text="Auto asignar" OnClick="btnAssign_Click" />
+                <asp:Button ID="btnDone" runat="server" CssClass="btn btn-primary" Text="Realizada" OnClick="btnDone_Click" />
+                <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-warning" Text="Eliminar" OnClick="btnDelete_Click" />
+
+            </div>
+
+        </div>
     </div>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
