@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Web.Security;
 
 namespace itApp
 {
@@ -15,11 +16,16 @@ namespace itApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ()
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            Debug.WriteLine(ticket.UserData);
+            if (!ticket.UserData.Contains("Domain Admins"))
             {
-
+                MessageBox.Show("No tienes permisos para administrar :(");
+                Response.Redirect("CaseQuestionnaire.aspx");
             }
             else {
+                
                 Table TableCase = (Table)FindControl("TableCase");
 
                 int row = 1;

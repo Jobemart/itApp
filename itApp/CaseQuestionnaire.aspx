@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse navbar-menubuilder">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">Home</a> </li>
-                    <li><a href="Admin">Administrar</a></li>
+                    <li><a href="Admin.aspx">Administrar</a></li>
                 </ul>
             </div>
         </div>

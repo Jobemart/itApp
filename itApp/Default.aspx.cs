@@ -19,7 +19,7 @@ namespace itApp
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            String adPath = "LDAP://bcn.pidcgroup.com"; //Fully-qualified Domain Name
+            String adPath = "LDAP://bcn.pidcgroup.com";
 
             TextBox UserNameBox = (TextBox)FindControl("UserBox");
             TextBox PasswordBox = (TextBox)FindControl("PasswordBox");
