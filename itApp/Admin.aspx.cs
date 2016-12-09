@@ -18,7 +18,7 @@ namespace itApp
         {
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            Debug.WriteLine(ticket.UserData);
+            //Debug.WriteLine(ticket.UserData);
             if (!ticket.UserData.Contains("Domain Admins"))
             {
                 MessageBox.Show("No tienes permisos para administrar :(");

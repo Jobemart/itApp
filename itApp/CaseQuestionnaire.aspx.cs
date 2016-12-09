@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Web.Security;
 using System.Security.Principal;
+using System.Net.Mail;
+using System.Net;
 
 namespace itApp
 {
@@ -64,7 +66,6 @@ namespace itApp
         protected void addCaseToBD(string TitleCase, string DescriptionCase, string ApplicantCase,
             string DeadlineCase, string CategoryCase, string PriorityCase, string DepartmentCase)
         {
-            Debug.WriteLine(ApplicantCase);
 
             DateTime CreationDate = DateTime.Now;
             string StatusCase = "Pending";
@@ -102,6 +103,34 @@ namespace itApp
                 });
                 newCmd.ExecuteNonQuery();
                 MessageBox.Show("Incidencia registrada con exito, anota esta ID: "+ID);
+
+                MailAddress fromAddress = new MailAddress("j.benito@winsystemsintl.com", "Joan");
+
+                MailMessage message = new MailMessage();
+
+                //message.From = new MailAddress("j.benito@winsystemsintl.com");
+                message.From = fromAddress;
+                message.To.Add(new MailAddress("j.benito@winsystemsintl.com"));
+                message.Subject = "Testing";
+                message.Body = "Esta es la ID de tu incidencia: "+ID;
+                message.IsBodyHtml = true;
+
+                SmtpClient client = new SmtpClient();
+                client.Host = "VSEX01.bcn.pidcgroup.com";
+                client.Port = 25;
+                client.UseDefaultCredentials = true;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = true;
+
+
+                try
+                {
+                    client.Send(message);
+                }
+                catch (Exception exc)
+                {
+                    Debug.WriteLine(exc.Message);
+                }
             }
             catch (Exception ex)
             {
