@@ -104,24 +104,25 @@ namespace itApp
                 newCmd.ExecuteNonQuery();
                 MessageBox.Show("Incidencia registrada con exito, anota esta ID: "+ID);
 
+                /* Desactivar protección de acceso */
+                
                 MailAddress fromAddress = new MailAddress("j.benito@winsystemsintl.com", "Joan");
 
                 MailMessage message = new MailMessage();
 
-                //message.From = new MailAddress("j.benito@winsystemsintl.com");
                 message.From = fromAddress;
                 message.To.Add(new MailAddress("j.benito@winsystemsintl.com"));
-                message.Subject = "Testing";
-                message.Body = "Esta es la ID de tu incidencia: "+ID;
+                message.Subject = "Información de tu incidencia";
+                message.Body = "Esta es la ID de tu incidencia "+TitleCase+":"+ID+"Creada el "+CreationDate.ToString();
                 message.IsBodyHtml = true;
 
                 SmtpClient client = new SmtpClient();
                 client.Host = "VSEX01.bcn.pidcgroup.com";
                 client.Port = 25;
-                client.UseDefaultCredentials = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential("j.benito@winsystemsintl.com", "cacafutilol1*");
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.EnableSsl = true;
-
+                client.EnableSsl = false;
 
                 try
                 {
@@ -129,7 +130,7 @@ namespace itApp
                 }
                 catch (Exception exc)
                 {
-                    Debug.WriteLine(exc.Message);
+                    Debug.WriteLine(exc.Message + " " + exc.Data);
                 }
             }
             catch (Exception ex)
